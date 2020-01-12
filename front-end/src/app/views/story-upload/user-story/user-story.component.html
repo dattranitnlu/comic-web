@@ -1,0 +1,116 @@
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3>Quản lý truyện<button class="btn btn-lg btn-primary" (click)="openAdd(contentAdd)"
+                  style="float: right;"><i class="fa fa-plus"></i></button></h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ngx-datatable class="material striped border" [rows]="stories" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" [footerHeight]="50" [summaryRow]="true" rowHeight="auto" [externalPaging]="true"
+            [count]="page.totalRows" [offset]="page.pageNumber" [limit]="page.pageSize" (page)="loadStories($event)">
+            <ngx-datatable-column name="Storyname">
+              <ng-template ngx-datatable-header-template>Tên truyện</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Copyright"></ngx-datatable-column>
+            <ngx-datatable-column name="Image">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <img src="http://localhost:3000/uploads/{{row.imgUrl}}" style="width: 60px; height: 80px;" />
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [width]="40" name="Option">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <i [routerLink]="[ '/user-stories', row.id ]" class="fa fa-list text-info mr-1 pointer"></i>
+                <i (click)="openEdit(row.id)" class="fa fa-edit text-primary mr-1 pointer"></i>
+                <i (click)="delete(row.id)" class="fa fa-trash-o text-danger pointer"></i>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+
+        <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+          aria-labelledby="dialog-child-name">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-child-name" class="modal-title pull-left">{{action}} Stories</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="form" novalidate enctype="multipart/form-data">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Tên truyện</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10" id="txtName"
+                        [ngClass]="{'is-invalid': form.controls['storyname'].touched && form.controls['storyname'].errors, 'is-valid': form.controls['storyname'].touched && !form.controls['storyname'].errors}"
+                        formControlName="storyname" [(ngModel)]="story.storyname" placeholder="name">
+                      <div
+                        *ngIf="form.controls['storyname'].touched && (form.controls['storyname'].hasError('minlength') || form.controls['storyname'].hasError('maxlength'))"
+                        class="invalid-feedback">
+                        Tên truyện không hợp lệ
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Mô tả</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['description'].touched && form.controls['description'].errors}"
+                        (keydown.enter)="save()" id="txtEmail" formControlName="description"
+                        [(ngModel)]="story.description" placeholder="description">
+
+                      <div
+                        *ngIf="form.controls['description'].touched && form.controls['description'].hasError('required')"
+                        class="invalid-feedback">
+                        Mô tả không hợp lệ
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Copyright</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['copyright'].touched && form.controls['copyright'].errors}"
+                        id="txtPhone" formControlName="copyright" [(ngModel)]="story.copyright" placeholder="copyright">
+                      <div *ngIf="form.controls['copyright'].touched && form.controls['copyright'].hasError('required')"
+                        class="invalid-feedback">
+                        Copyright không hợp lệ
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Hình ảnh</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['imgurl'].touched && form.controls['imgurl'].errors}"
+                        (keydown.enter)="save()" id="txtAddress" formControlName="imgurl" [(ngModel)]="story.imgurl"
+                        placeholder="imgurl" (change)="uploader.uploadAll()" ng2FileSelect [uploader]="uploader"
+                        accept="image/x-png,image/gif,image/jpeg">
+                      <div *ngIf="form.controls['imgurl'].touched && form.controls['imgurl'].hasError('required')"
+                        class="invalid-feedback">
+                        Đường link hình ảnh không đúng
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" [disabled]="!form.valid" class="btn btn-outline-dark"
+                      (click)="save()">Lưu</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

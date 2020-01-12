@@ -1,0 +1,184 @@
+<!-- <p>user-story-chapters works!</p>
+
+<button type="button" class="btn btn-success" (click)="staticModal.show()">ADD</button>
+
+<table style="width:30%; border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">Story Chapters</th>
+    </tr>
+    <tr *ngFor="let chap of storyChapters">
+        <td style="border: 1px solid black;"><a [routerLink]="[ '/stories', chap.storyId, chap.id ]">{{chap.name}}</a>
+        </td>
+    </tr>
+</table>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left">Static modal</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>
+                        ID:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Story ID:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Name:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Content:
+                        <ck-editor name="editor1" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+                        <!-- <ckeditor [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic' ] }"></ckeditor> -->
+<!-- </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dranger" (click)="save()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="staticModal.hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row">
+            <div class="col">
+              <h3>Chapters Managerment<button class="btn btn-lg btn-primary" (click)="openAdd(contentAdd)"
+                  style="float: right;"><i class="fa fa-plus"></i></button></h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ngx-datatable class="material striped border" [rows]="chapters" [columns]="columns" [columnMode]="'force'"
+            [headerHeight]="50" [footerHeight]="50" [summaryRow]="true" rowHeight="auto" [externalPaging]="true"
+            [count]="page.totalRows" [offset]="page.pageNumber" [limit]="page.pageSize" (page)="loadChapters($event)">
+            <ngx-datatable-column name="Chapname">
+              <ng-template ngx-datatable-header-template>Chapter name</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Postdata"></ngx-datatable-column>
+            <ngx-datatable-column name="Coin"></ngx-datatable-column>
+            <ngx-datatable-column name="Chapstatus"></ngx-datatable-column>
+            <ngx-datatable-column [width]="40" name="Option">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <i (click)="openEdit(row.id)" class="fa fa-edit text-primary mr-1 pointer"></i>
+                <i (click)="delete(row.id)" class="fa fa-trash-o text-danger pointer"></i>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+
+        <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+          aria-labelledby="dialog-child-name">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-child-name" class="modal-title pull-left">{{action}} Chapter</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="form" novalidate>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Chaptername</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10" id="txtName"
+                        [ngClass]="{'is-invalid': form.controls['chapname'].touched && form.controls['chapname'].errors, 'is-valid': form.controls['chapname'].touched && !form.controls['chapname'].errors}"
+                        formControlName="chapname" [(ngModel)]="chapter.chapname" placeholder="name">
+                      <div
+                        *ngIf="form.controls['chapname'].touched && (form.controls['chapname'].hasError('minlength') || form.controls['chapname'].hasError('maxlength'))"
+                        class="invalid-feedback">
+                        Chapter name is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Txt File</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control col-lg-10" id="txtFile" placeholder="txt"
+                        (change)="onChange($event.target.files)">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Postdata</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['postdata'].touched && form.controls['postdata'].errors}"
+                        (keydown.enter)="save()" id="txtEmail" formControlName="postdata" [(ngModel)]="chapter.postdata"
+                        placeholder="postdata">
+                      <!-- <div *ngIf="form.controls['postdata'].touched && form.controls['postdata'].hasError('required')"
+                          class="invalid-feedback">
+                          Postdata is invalid
+                        </div> -->
+                      <!-- <ckeditor  formControlName="content" [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic' ] }"></ckeditor> -->
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Coin</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['coin'].touched && form.controls['coin'].errors}"
+                        id="txtPhone" formControlName="coin" [(ngModel)]="chapter.coin" placeholder="coin">
+                      <div *ngIf="form.controls['coin'].touched && form.controls['coin'].hasError('required')"
+                        class="invalid-feedback">
+                        Coin is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                      <label class="col-sm-2 col-form-label col-form-label-sm">Chapstatus</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control col-lg-10"
+                          [ngClass]="{'is-invalid': form.controls['chapstatus'].touched && form.controls['chapstatus'].errors}"
+                          (keydown.enter)="save()" id="txtAddress" formControlName="chapstatus"
+                          [(ngModel)]="chapter.chapstatus" placeholder="chapstatus">
+                        <div
+                          *ngIf="form.controls['chapstatus'].touched && form.controls['chapstatus'].hasError('required')"
+                          class="invalid-feedback">
+                          Chapstatus is invalid
+                        </div>
+                      </div>
+                    </div> -->
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label col-form-label-sm">Chapstatus</label>
+                    <div class="col-sm-10">
+                      <select class="form-control col-lg-10"
+                        [ngClass]="{'is-invalid': form.controls['chapstatus'].touched && form.controls['chapstatus'].errors}"
+                        [(ngModel)]="chapter.chapstatus" formControlName="chapstatus">
+                        <option value="true" [selected]="true">Enabled</option>
+                        <option value="false">Disabled</option>
+                      </select>
+                      <div
+                        *ngIf="form.controls['chapstatus'].touched && form.controls['chapstatus'].hasError('required')"
+                        class="invalid-feedback">
+                        Chapstatus is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="save()">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

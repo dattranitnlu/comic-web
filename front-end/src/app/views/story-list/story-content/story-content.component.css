@@ -1,0 +1,16 @@
+.wrapper  {
+   
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #F2F2F2	;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+.comp {
+    background: #FFFFFF;
+    border-color: #333333;
+}

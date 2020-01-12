@@ -1,0 +1,199 @@
+<div class="mb-n3">
+    <div class="navbar justify-content-between p-0"
+        style="background-image: linear-gradient(rgb(255, 255, 255),rgb(155, 192, 226)); height: 80px;">
+        <div class="navbar-brand" style="top: 0;">
+            <img src="../assets/logo.png" width="80px" height="60px" style="margin-left: 30px;"
+                [routerLink]="[ '/stories']">
+        </div>
+        <div>
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <input class="form-control my-0 py-1" style="width: 400px;" type="text" placeholder="Tìm kiếm ..."
+                    aria-label="Search">
+                <div class="input-group-append">
+                    <span class="input-group-text lighten-2" style="background-color: orange;"><i class="fa fa-search"
+                            aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="show; else elseBlock">
+            <div class="row">
+            <span style="padding-top: 1rem; padding-right: 3rem;">{{user.coin}} <i class="fa fa-bitcoin" style="color: gold;"></i></span>
+            <div class="mr-sm-2">
+
+                <div class="" mdbDropdown>
+                    <button mdbDropdownToggle type="button" mdbBtn class="dropdown-toggle">
+                        Xin chào, {{userName}}
+                    </button>
+
+                    <div class="dropdown-menu dropdown-primary">
+                        <a class="dropdown-item" [routerLink]="[ '/list', userid ]">Danh sách truyện</a>
+                        <a class="dropdown-item" [routerLink]="[ '/user/payment' ]">Nạp tiền</a>
+                        <a class="dropdown-item" [routerLink]="[ '/user/transaction-histories', userid ]">Lịch sử
+                            bán</a>
+                        <a class="dropdown-item" (click)="openChangePassword(contentChange)">Đổi mật
+                            khẩu</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" (click)=" logout()">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div bsModal #changePasswordModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+                aria-labelledby="dialog-child-name">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 id="dialog-child-name" class="modal-title pull-left">Đổi mật khẩu</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="hideChangePassword()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword(changePasswordForm.value)">
+                                <div class="form-group">
+                                    <label>Mật khẩu cũ</label>
+                                    <input type="password" formControlName="oldPassword" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" [(ngModel)]="changeP.oldPassword"/>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Yêu cầu nhập mật khẩu</div>
+                                        <div *ngIf="f.password.errors.minlength">Mật khẩu ít nhất 6 kí tự</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mật khẩu mới</label>
+                                    <input type="password" formControlName="newPassword" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" [(ngModel)]="changeP.newPassword"/>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Yêu cầu nhập mật khẩu</div>
+                                        <div *ngIf="f.password.errors.minlength">Mật khẩu ít nhất 6 kí tự</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Xác thực mật khẩu</label>
+                                    <input type="password" formControlName="confirmPassword"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" [(ngModel)]="changeP.confirmPassword"/>
+                                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="f.confirmPassword.errors.required">Yêu cầu nhập mật khẩu
+                                        </div>
+                                        <div *ngIf="f.confirmPassword.errors.mustMatch">Mật khẩu phải khớp
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Thay đổi mật khẩu</button>
+                                </div>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #elseBlock>
+            <div class="mr-sm-2">
+                <div class="">
+                    <button class="btn btn-outline-primary" [routerLink]="[ '/login']" style="margin: 9px;">Đăng
+                        nhập</button>
+                    <button class="btn btn-outline-danger" (click)="openAdd(contentAdd)" style="margin: 9px;">Đăng
+                        ký</button>
+                    <div bsModal #registerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+                        aria-labelledby="dialog-child-name">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="dialog-child-name" class="modal-title pull-left">Register</h4>
+                                    <button type="button" class="close pull-right" aria-label="Close"
+                                        (click)="hideModal()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form [formGroup]="registerForm" novalidate>
+                                        <div class="form-group">
+                                            <label>FullName</label>
+                                            <input type="text" formControlName="fullName" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+                                                [(ngModel)]="user.fullname" />
+                                            <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                                                <div *ngIf="f.fullName.errors.required">FullName is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" formControlName="email" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                                [(ngModel)]="user.email" />
+                                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                                <div *ngIf="f.email.errors.email">Email must be a valid email address
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" formControlName="username" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                                                [(ngModel)]="user.username" />
+                                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                                <div *ngIf="f.username.errors.required">Username is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" formControlName="password" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                                [(ngModel)]="user.password" />
+                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                                <div *ngIf="f.password.errors.minlength">Password must be at least 6
+                                                    characters</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <input type="password" formControlName="confirmPassword"
+                                                class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                                            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is
+                                                    required
+                                                </div>
+                                                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" (click)="save()">Register</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </div>
+    <div>
+        <section style="color: rgba(0, 0, 0, 0.5); padding: 0; margin: 0;">
+            <nav class="fill">
+                <ul>
+                    <li><a href="/stories"><i class="fa fa-home"></i> Trang chủ</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Hot</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Thể loại</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Theo dõi</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Lịch sử</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Fanpage</a></li>
+                    <li><a href="https://www.facebook.com/khac.nghi.948">Góp ý</a></li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,103 @@
+<!-- 
+<table style="width:30%; border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">ID</th>
+        <th style="border: 1px solid black;">Name</th>
+    </tr>
+    <tr *ngFor="let story of stories">
+        <td style="border: 1px solid black;">{{story.id}}</td>
+        <td style="border: 1px solid black;"><a [routerLink]="[ '/stories', story.id ]">{{story.name}}</a></td>
+    </tr>
+</table> -->
+<div style="background-color:#EEEEEE;">
+    <div class="container pt-4 pb-4" style=" margin-left: 2rem; margin-right: 2rem;">
+        <div class="row" style="width: 80rem; height: 26rem;">
+            <div class=" col-12 mb-3"
+                style="background-color: rgba(255, 255, 255, 0.938);border-style:double; border-width: 5px;">
+                <div class="border-bottom">
+                    <h5 class="font-weight-normal pt-2" style="color: #eb1c0d; font-weight: bolder;"><i
+                            class="fa fa-free-code-camp"></i> Truyện HOT <img
+                            src="http://static.skaip.org/img/emoticons/180x180/f6fcff/fireworks.gif"
+                            style="width: 30px; height: 30px;" /></h5>
+                </div>
+                <div class="row" style="height: 20rem;">
+                    <div class="wrapper">
+                        <div class="container1" id="c0">
+                            <div class="image" id="i0">
+                                <img class="border-bottom" style="width: 12rem; height: 15.5rem;"
+                                    src="http://localhost:3000/uploads/{{top1.imgUrl}}" alt="loading...">
+                            </div>
+                        </div>
+                        <div class="container1" id="c1">
+                            <img class="border-bottom" style="width: 12rem; height: 15.5rem;"
+                                src="http://localhost:3000/uploads/{{top2.imgUrl}}" alt="loading...">
+                        </div>
+                        <div class="container1" id="c2">
+                            <img class="border-bottom" style="width: 12rem; height: 15.5rem;"
+                                src="http://localhost:3000/uploads/{{top3.imgUrl}}" alt="loading...">
+                        </div>
+                        <div class="container1" id="c3">
+                            <img class="border-bottom" style="width: 12rem; height: 15.5rem;"
+                                src="http://localhost:3000/uploads/{{top4.imgUrl}}" alt="loading...">
+                        </div>
+                        <div class="container1" id="c4">
+                            <img class="border-bottom" style="width: 12rem; height: 15.5rem;"
+                                src="http://localhost:3000/uploads/{{top5.imgUrl}}" alt="loading...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 border center" style="background-color: #FFFFFF;">
+                <div class="border-bottom">
+                    <h5 id="chap" class="font-weight-normal pt-2" style="color: #0deb50;"><i class="fa fa-star-o"></i>
+                        Danh sách truyện</h5>
+                </div>
+                <div class="row mt-3">
+                    <div class="p-2 mb-4 border" style="width:11.8rem;margin-left: 2.4rem;"
+<<<<<<< HEAD
+                        *ngFor="let story of stories | paginate: { itemsPerPage: 8, currentPage: p }">
+=======
+                        *ngFor="let story of stories">
+>>>>>>> ee97aa05aac2e95f6ecbe25cee67d2851934eba4
+                        <a [routerLink]="[ '/stories', story.id ]"><img class="border-bottom mb-2 pb-2"
+                                src="http://localhost:3000/uploads/{{story.imgUrl}}"
+                                style="width: 220px; height: 300px;" alt="loading..."></a>
+                        <span style="text-align: center;">{{story.storyname}}</span>
+                    </div>
+                    <div class="col-12 border-top right" style="padding-top: 10px;">
+                    <div style="margin-left: 40rem;">
+                    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2" style="padding-left: 3.5rem;">
+                <div class=" border" style="height: 24rem; width: 17rem;background-color: #FFFFFF;">
+                    <div class="border-bottom ml-3 mr-3">
+                        <h5 class="font-weight-normal pt-2" style="color: #eb9d0d;"><i class="fa fa-diamond"></i> Thể
+                            loại</h5>
+                    </div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Thơ </div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Viễn tưởng</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Phép thuật</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Ngôn tình</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Hành động</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Kinh dị</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Trinh thám</div>
+                    <div class=" m-3" style="color: #2f7fe7;"><i class="fa fa-circle"></i> Học đường</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="show; else elseBlock">
+    <div class="card"
+        style="width: 18rem; height: 15.5rem; position:fixed; bottom: 0rem; right: 0rem;background-image:url('https://k8daily.com/wp-content/uploads/2017/12/300x250.gif')">
+        <input (click)="close()" type="image" alt="top"
+            src="https://www.easybathrooms.com/media/contenttype/xclose-icon-white.png.pagespeed.ic.SgOrfy65Eg.png"
+            width="30px" height="30px" style="position:fixed;right:0.3rem;top:26rem" />
+        <div style="width: 150px; height: 150px;"></div>
+    </div>
+</div>

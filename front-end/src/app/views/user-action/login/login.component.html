@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <form id='login' class="sign-box enters" method="post">
+    <div class="sign-avatar">
+      <img src="../assets/logo.png" alt="logo">
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="username" class="form-control" name="username" placeholder="Tên đăng nhập">
+
+    </div>
+    <div class="form-group">
+      <input type="password" [(ngModel)]="password" class="form-control" name="password" (keydown.enter)="login()"
+        placeholder="Mật khẩu">
+    </div>
+
+    <p>
+      <button type="button" class="btn btn-info" (click)="login()">Đăng nhập</button>
+    </p>
+    <a [routerLink]="[ '/forgot']" class="reset">Quên mật khẩu? </a>
+    <a href="#" class="create">Đăng kí</a>
+  </form>
+</div>

@@ -1,0 +1,42 @@
+<div class="row p-3" style=" margin-top: 50px; margin-left: 40px;">
+    <div class="col-3 pr-5 mr-3">
+    <div class="card p-3">
+        <div class=" p-2">
+        <strong style="color: chartreuse;">Mệnh giá</strong>
+        <div class="border-bottom pt-2 pb-2">(1 xu = 0.02$)</div>
+        </div>
+        <igx-radio *ngFor="let p of pay"
+        name="p"
+        [value]="p.value"
+        (click)="choose($event)"
+        [(ngModel)]="selectedValue">
+        <div class="pb-2"> +{{p.name}}</div>
+        </igx-radio>
+    </div>
+    </div>
+    <div class="col-5 card p-3" >
+        <div class="border-bottom">
+        <div class="row">
+        <div class="pl-3 pr-3 pt-2">
+            Nhập số xu cần mua:
+        </div>
+        <div class="col-8">
+            <input class="form-control" type="text" [(ngModel)]="coin" (keyup)="convert($event)" name="input" min="0"
+            pattern="^[0-9]+\.[0-9][0-9]$" required>
+        </div>
+        </div> 
+        <div class="row">
+            <div class="pl-3 pr-3 pt-3 pr-5 ">
+                Số tiền:
+            </div>
+            <div class="pb-2 pt-3 pl-5 ml-4">
+                <strong style="color: crimson;"><span style="color: black">{{money}}</span>$</strong>
+            </div>
+        </div> 
+        </div>
+        <div class="col-9 pl-5 ml-5 mr-4 pt-3">     
+        <ngx-paypal style="width: 300px;" [config]="payPalConfig"></ngx-paypal>
+        </div> 
+    </div>
+    <div class="col-3"></div>
+</div>

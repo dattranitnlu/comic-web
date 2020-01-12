@@ -1,0 +1,37 @@
+<div class="">
+    <div class="row">
+        <div class="col-11  ">
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th scope="col">Stt</th>
+                        <th scope="col">Người dùng</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Số xu</th>
+                        <th scope="col">Giá trị</th>
+                        <th scope="col">Ngày thanh toán</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Kích hoạt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pay of payments; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{pay.user.username}}</td>
+                        <td>{{pay.payerEmail}}</td>
+                        <td>{{pay.coin}}</td>
+                        <td>{{pay.payValue}}</td>
+                        <td>{{pay.payDate}}</td>
+                        <td *ngIf="pay.payStatus == true" style="color: blue;">Đã thanh toán</td>
+                        <td *ngIf="pay.payStatus == false" style="color: red;">Đang xử lý</td>
+                        <td><input *ngIf="pay.payStatus == false" type="checkbox"
+                                (change)="check(pay.id,pay.userid,pay.user.coin,pay.coin)" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+</div>

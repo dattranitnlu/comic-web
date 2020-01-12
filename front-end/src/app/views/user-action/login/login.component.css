@@ -1,0 +1,177 @@
+body,
+html {
+    overflow: hidden;
+    height: 100%;
+    background: #e2e7ec url(https://i.imgpile.com/i/vg1kF.jpg);
+  background-size:cover;
+    color:#666
+}
+.container-fluid{
+  perspective: 300px;
+}
+.btn{
+  cursor:pointer
+}
+.sign-box {
+    width: 100%;
+    max-width: 322px;
+    margin: 20vh auto;
+    background:rgba(255,255,255,0.7);
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.43) 26%,rgba(255,255,255,0.9) 100%);
+    border: 1px solid #d8e2e7;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1rem;
+    position: relative;
+    max-height: 600px;
+    overflow: hidden;
+    opacity: 1;
+    text-align: center;
+    
+  transition: .3s cubic-bezier(.3,1.5,.7,1) transform;
+}
+.enters{
+  animation: slidedown 1.84s 1;
+}
+.sign-box .sign-avatar {
+    width: 200px;
+    margin: 30px auto;
+}
+.sign-box .sign-avatar img {
+    display: block;
+    width: 100%;
+}
+.sign-box .btn {
+    display: block;
+    min-width: 108px;
+    margin: 16px auto 12px;
+    cursor:pointer
+}
+.sign-box .btn.sign-up {
+    margin-top: 18px
+}
+.sign-box .sign-note {
+    text-align: center
+}
+.sign-box a {
+    text-decoration: none;
+    color: #0082c6;
+    border-bottom: solid 1px transparent
+}
+.sign-box a:hover {
+    border-bottom-color: rgba(0, 130, 198, .5)
+}
+.sign-box .form-group {
+    margin-bottom: 12px;
+    zoom: 1
+}
+.sign-box .form-group:after,
+.sign-box .form-group:before {
+    content: " ";
+    display: table
+}
+.sign-box .form-group:after {
+    clear: both
+}
+.alert.hidden{
+  display:none !important
+}
+
+.sign-box .reset {
+    font-size: .875rem
+}
+.sign-box .create {
+    color: #4CAF50;
+  text-decoration: none;
+}
+.sign-box .close {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    opacity: 1;
+    color: #c5d6de
+}
+.sign-box .close:hover {
+    color: #00a8ff
+}
+
+::-webkit-input-placeholder {
+    color: #bbb !important;
+}
+.bot a {
+    color: #999 !important;
+    border: 0px solid #ddd !important;
+    background:#ddd;
+    overflow:hidden;
+    display:inline-block;
+    width:140px;
+    white-space:nowrap;
+    text-align:left;
+    border-radius:20px;
+    transition:all 0.2s
+}
+.bot i {
+    font-size: 32px;
+    vertical-align: middle;
+    transform: rotate(90deg);
+    transition: all 0.4s
+}
+.bot:hover i, .bot:hover span{
+    color:#678
+}
+.bot .fa-check-circle {
+    color: #5bc0de !important;
+    transform: rotate(0deg);
+}
+.bot span{
+    font-size:14px;
+    padding:0  0 0 10px;
+    display:inline-block;
+    text-shadow:0 1px 0 #fff;
+}
+.bot .chk{
+    width:28px;
+    background:#fff
+}
+.shake {
+    transform-origin: center;
+    animation-name: shake;
+    animation-duration: 400ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out
+}
+@keyframes slidedown{
+  0%{ max-height:0px;opacity:0}
+  100%{ max-height:600px;opacity:1}
+}
+@keyframes shake {
+      0% {transform: none }
+12.5% {transform: translateX(-6px) rotateY(-5deg) }
+37.5% {transform: translateX(5px) rotateY(4deg) }
+62.5% {transform: translateX(-3px) rotateY(-3deg) }
+ 87.5% {transform: translateX(2px) rotateY(2deg) }
+ 100% {transform: none }
+}
+
+  
+/* follow me @nodws */
+#btn-twtr{
+  clear:both;
+  color:#fff;
+  border:2px solid;
+  border-radius:3px;
+  text-align:center;
+  text-decoration:none;
+  display:block;
+  font-family:sans-serif;
+  font-size:14px;
+  width:13em;
+  padding:5px 10px;
+  font-weight:600;
+  position:absolute;
+  top:90vh;
+  right:1vh;
+  background:rgba(0,0,0,0.2);
+  box-shadow:0 0 0px 3px rgba(0,0,0,0.2);
+  opacity:0.6
+}#btn-twtr:hover{color:#fff;opacity:1}

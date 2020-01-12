@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Stt</th>
+                            <th scope="col">Nguời mua</th>
+                            <th scope="col">Chương</th>
+                            <th scope="col">Số xu</th>
+                            <th scope="col">Ngày</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tran of tranHistories; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{tran.buyer.username}}</td>
+                            <td>{{tran.chapter.chapname}}</td>
+                            <td>{{tran.chapCoin}}</td>
+                            <td>{{tran.tranDate}}</td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>

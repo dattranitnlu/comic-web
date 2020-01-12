@@ -1,0 +1,17 @@
+<div class="container-fluid">
+ 
+    <form id='login' class="sign-box enters" method="post">
+      <div class="sign-avatar">
+        <img src="../assets/logo.png" alt="logo">
+      </div>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="email" class="form-control" name="email" placeholder="Email">
+      </div>
+      <p>
+        <button type="button" class="btn btn-info" (click)="getCode()">Lấy lại mật khẩu</button>
+      </p>  
+    </form>
+  
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+  </div>

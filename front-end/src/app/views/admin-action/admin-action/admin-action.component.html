@@ -1,0 +1,66 @@
+<!-- <div class="row">
+    <div class="col-12"></div>
+</div>
+<div class="row mt-1">
+    <div class="col-3">
+        <ul class="nav flex-column"
+            style="background-image: linear-gradient(seagreen,lightgreen); color: blanchedalmond;">
+            <li class="nav-item border">
+                <a class="nav-link text-light" routerLink="/admin/payment-managerment" >Quản lý thanh toán</a>
+            </li>
+            <li class="nav-item border">
+                <a class="nav-link text-light" routerLink="/admin/transaction-managerment">Quản lý giao dịch</a>
+            </li>
+            <li class="nav-item border">
+                <a class="nav-link text-light" href="#">Quản lý hóa đơn</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+<body class="igx-typography">
+
+<div class="main" igxLayout>
+    <igx-nav-drawer id="navigation" [isOpen]="drawerState.open" [(pin)]="drawerState.pin">
+      <ng-template igxDrawer>
+        <span class="border-bottom" style="text-align: center;font-weight: height;" igxDrawerItem [isHeader]="true">ADMIN</span>
+        <nav>
+            <span igxDrawerItem>
+            <igx-icon fontSet="material">web</igx-icon>
+            <a class="nav-link " routerLink="/admin/payment-managerment" >Quản lý thanh toán</a>
+            </span>
+        </nav>
+       
+        <nav>
+            <span igxDrawerItem>
+            <igx-icon fontSet="material">swap_vert</igx-icon>
+            <a class="nav-link " style="text-decoration-color: black;"  routerLink="/admin/transaction-managerment">Quản lý giao dịch</a>
+            </span>
+        </nav>
+        <nav>
+            <span igxDrawerItem>
+            <igx-icon fontSet="material">tab</igx-icon>
+            <a class="nav-link " routerLink="/admin/transaction-managerment">Quản lý hóa đơn</a>
+            </span>
+        </nav>
+      </ng-template>
+      <ng-template igxDrawerMini *ngIf="drawerState.miniTemplate">
+          <nav>
+            <span igxDrawerItem igxRipple >
+              <igx-icon fontSet="material">Avatar</igx-icon>
+            </span>
+        </nav>
+        </ng-template>
+    </igx-nav-drawer>
+  
+    <main igxFlex [class.mini-padding]="!drawerState.pin && drawerState.miniTemplate">
+        <span igxButton="icon" igxToggleAction="navigation">
+            <igx-icon fontSet="material">menu</igx-icon>
+          </span>
+          <router-outlet></router-outlet>
+
+    </main>
+  </div>
+  </body>

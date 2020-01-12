@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row border-bottom">
+        <div class="col-3"></div>
+        <div class="col-6 text-center">
+            <h4 style="color: crimson;">{{chapter.chapname}}</h4>
+            <p>Truyện: <a href="">{{story.storyname}}</a></p>
+            <!-- nếu story.user bị null thì các lệnh ở dưới sẽ không được thực thi -->
+            <p>Tác giả: <a href="">{{story.user.fullname}}</a></p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <h5 style="color: crimson;">Bạn cần {{chapter.coin}} xu để đọc được chương này.</h5>
+        </div>
+        <div class="col-9">
+            <br>
+            <p>Số xu của bạn: <strong>{{user.coin}}</strong></p>
+            <p>Số xu yêu cầu: <strong>{{chapter.coin}}</strong></p>
+            <div class="border-bottom"></div>
+            <p>Số xu còn lại: <strong style="color: crimson;">{{user.coin - chapter.coin}}</strong></p>
+            <p *ngIf="(user.coin - chapter.coin) < 0" style="color: crimson;">Bạn không đủ xu để mua.</p>
+        </div>
+        <div class="col-3 align-self-end">
+            <button class="btn btn-primary btn-sm" (click)="buy()" [disabled]="user.coin < chapter.coin">Thanh
+                toán</button>
+        </div>
+    </div>
+</div>

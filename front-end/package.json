@@ -28,7 +28,7 @@
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "igniteui-angular": "^8.2.13",
-    "jszip": "^3.1.5",
+    "jszip": "^3.7.0",
     "minireset.css": "~0.0.4",
     "ng2-file-upload": "^1.3.0",
     "ngx-bootstrap": "^5.2.0",
